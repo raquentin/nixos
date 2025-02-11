@@ -79,11 +79,13 @@
         /* some css */
       '';
 
-      # extensions = with inputs.firefox-addons.packages."x86_64-linux"; [
-      #   proton-pass
-      #   ublock-origin
-      #   vimium
-      # ];
+      extensions = with inputs.firefox-addons.packages.${pkgs.system}; [
+        proton-pass
+        ublock-origin
+        df-youtube
+        darkreader
+        vimium
+      ];
     };
   };
 }

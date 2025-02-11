@@ -19,29 +19,33 @@
     hyprland.url = "github:hyprwm/Hyprland";
   };
 
-  outputs = { self, nixpkgs, home-manager, ... }@inputs:
-    let
-      inherit (self) outputs;
-      systems = [ "x86_64-linux" "aarch64-linux" ];
-      forAllSystems = nixpkgs.lib.genAttrs systems;
-    in {
-      packages = forAllSystems (system: import ./pkgs nixpkgs.legacyPackages.${system});
+  outputs = {
+    self,
+    nixpkgs,
+    home-manager,
+    ...
+  } @ inputs: let
+    inherit (self) outputs;
+    systems = ["x86_64-linux" "aarch64-linux"];
+    forAllSystems = nixpkgs.lib.genAttrs systems;
+  in {
+    packages = forAllSystems (system: import ./pkgs nixpkgs.legacyPackages.${system});
 
-      overlays = import ./overlays { inherit inputs; };
+    overlays = import ./overlays {inherit inputs;};
 
-      nixosModules = import ./modules/nixos;
+    nixosModules = import ./modules/nixos;
 
-      homeManagerModules = import ./modules/home-manager;
+    homeManagerModules = import ./modules/home-manager;
 
-      nixosConfigurations = {
-        x86 = nixpkgs.lib.nixosSystem {
-          specialArgs = { inherit inputs outputs; };
-          modules = [ ./hosts/x86/configuration.nix ];
-        };
-	m1 = nixpkgs.lib.nixosSystem {
-          specialArgs = { inherit inputs outputs; };
-          modules = [ ./hosts/m1/configuration.nix ];
-	};
+    nixosConfigurations = {
+      x86 = nixpkgs.lib.nixosSystem {
+        specialArgs = {inherit inputs outputs;};
+        modules = [./hosts/x86/configuration.nix];
+      };
+      m1 = nixpkgs.lib.nixosSystem {
+        specialArgs = {inherit inputs outputs;};
+        modules = [./hosts/m1/configuration.nix];
       };
     };
+  };
 }
