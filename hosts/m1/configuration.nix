@@ -120,6 +120,17 @@
     git
   ];
 
+  environment.etc."xdg/user-dirs.defaults".text = ''
+    DESKTOP=media/desktop
+    DOWNLOAD=tmp
+    TEMPLATES=media/templates
+    PUBLICSHARE=media/public
+    DOCUMENTS=bib
+    MUSIC=media/audio
+    PICTURES=media/img
+    VIDEOS=media/video
+  '';
+
   # Some programs need SUID wrappers, can be configured further or are
   # started in user sessions.
   programs.mtr.enable = true;
