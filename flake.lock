@@ -389,6 +389,22 @@
         "type": "github"
       }
     },
+    "neovim-colorscheme": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1626289966,
+        "narHash": "sha256-TgilR5jnos2YZeaJUuej35bQ9yE825MQk0s6gxwkAbA=",
+        "owner": "kdheepak",
+        "repo": "monochrome.nvim",
+        "rev": "2de78d9688ea4a177bcd9be554ab9192337d35ff",
+        "type": "github"
+      },
+      "original": {
+        "owner": "kdheepak",
+        "repo": "monochrome.nvim",
+        "type": "github"
+      }
+    },
     "nixpkgs": {
       "locked": {
         "lastModified": 1738410390,
@@ -449,6 +465,7 @@
         "firefox-addons": "firefox-addons",
         "home-manager": "home-manager",
         "hyprland": "hyprland",
+        "neovim-colorscheme": "neovim-colorscheme",
         "nixpkgs": "nixpkgs_2"
       }
     },

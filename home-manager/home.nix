@@ -1,11 +1,18 @@
-{ inputs, outputs, lib, config, pkgs, ... }:
-
 {
+  inputs,
+  outputs,
+  lib,
+  config,
+  pkgs,
+  ...
+}: {
   imports = [
     ../modules/fastfetch
     ../modules/firefox
     ../modules/neovim
-    ../modules/wezterm
+    ../modules/ghostty
+    ../modules/kitty
+    ../modules/tmux
     ../modules/zsh
   ];
 
@@ -32,11 +39,12 @@
     ripgrep
     jq
     eza
+    zoxide
     fzf
-    typst
 
     # pl
     python312
+    typst
   ];
 
   programs.git = {

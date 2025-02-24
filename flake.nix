@@ -2,7 +2,9 @@
   description = "Raquentin's NixOS flake";
 
   inputs = {
-    nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
+    nixpkgs = {
+      url = "github:nixos/nixpkgs/nixos-unstable";
+    };
 
     home-manager = {
       url = "github:nix-community/home-manager/release-24.11";
@@ -13,6 +15,11 @@
     firefox-addons = {
       url = "gitlab:rycee/nur-expressions?dir=pkgs/firefox-addons";
       inputs.nixpkgs.follows = "nixpkgs";
+    };
+
+    neovim-colorscheme = {
+      url = "github:kdheepak/monochrome.nvim";
+      flake = false;
     };
 
     # the Hyprland window manager

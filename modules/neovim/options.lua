@@ -1,5 +1,5 @@
 -- colorscheme
-vim.cmd.colorscheme("kanagawa-dragon")
+vim.cmd.colorscheme("quiet")
 
 -- text
 vim.g.have_nerd_font = true
@@ -24,7 +24,9 @@ vim.opt.mouse = "a"
 vim.opt.showmode = false
 
 -- clipboard
-vim.schedule(function() vim.opt.clipboard = "unnamedplus" end)
+vim.schedule(function()
+	vim.opt.clipboard = "unnamedplus"
+end)
 
 -- undo
 vim.opt.undofile = true

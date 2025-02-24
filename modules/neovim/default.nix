@@ -1,4 +1,8 @@
-{ pkgs, ... }: {
+{
+  pkgs,
+  inputs,
+  ...
+}: {
   programs.neovim = {
     enable = true;
     defaultEditor = true;
@@ -15,6 +19,7 @@
       gleam # gleam
       ocamlPackages.lsp # ocaml
       llvmPackages_19.clang-tools # c, cpp
+      llvmPackages_19.libcxxClang # goto def cpp
       jdt-language-server # java
       tinymist # typst
 
@@ -23,6 +28,7 @@
       black # python
       rustfmt # rust
       stylua # lua
+      cmake-format #cmake
 
       # clipboard
       xclip
@@ -54,9 +60,7 @@
       # fmt, lint
       conform-nvim
       nvim-lint
-
-      # aesthetics
-      kanagawa-nvim
+      guess-indent-nvim
 
       # which
       which-key-nvim
@@ -74,6 +78,7 @@
       ${builtins.readFile ./keymaps.lua}
       ${builtins.readFile ./options.lua}
 
+      ${builtins.readFile ./plugins/colors.lua}
       ${builtins.readFile ./plugins/cmp.lua}
       ${builtins.readFile ./plugins/lsp.lua}
       ${builtins.readFile ./plugins/fmt.lua}
@@ -83,9 +88,7 @@
       ${builtins.readFile ./plugins/tree.lua}
       ${builtins.readFile ./plugins/which.lua}
       ${builtins.readFile ./plugins/harpoon.lua}
-      ${builtins.readFile ./plugins/kanagawa.lua}
+      ${builtins.readFile ./plugins/indent.lua}
     '';
   };
-
-
 }

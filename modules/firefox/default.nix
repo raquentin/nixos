@@ -62,6 +62,22 @@
                   name = "piazza";
                   url = "https://piazza.com/class/m5izre67uns1n5";
                 }
+                {
+                  name = "gradescope";
+                  url = "https://www.gradescope.com/";
+                }
+                {
+                  name = "canvas";
+                  url = "https://gatech.instructure.com/courses";
+                }
+                {
+                  name = "basecamp";
+                  url = "https://3.basecamp.com/4261899/buckets/13381934/questions/3077765370";
+                }
+                {
+                  name = "notion";
+                  url = "https://www.notion.so/Race-Williams-Notebook-bd6c2841dd1a46a4a20de38806b66ebc";
+                }
               ];
             }
           ];

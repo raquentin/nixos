@@ -68,9 +68,11 @@
   };
 
   services.xserver.enable = true; # x11
-
   services.displayManager.sddm.enable = true; # kde plasma
   services.desktopManager.plasma6.enable = true; # kde plasma
+  services.xserver.videoDrivers = ["nvidia"];
+
+  programs.hyprland.enable = true;
 
   # x11 keymap
   services.xserver.xkb = {
@@ -97,6 +99,8 @@
 
   # shell must be at system level
   programs.zsh.enable = true;
+  programs.zsh.shellInit = "eval \"$(zoxide init zsh)\"
+  [ -z \"$TMUX\"  ] && { tmux attach || exec tmux new-session && exit;}";
 
   users.users.race = {
     isNormalUser = true;
@@ -105,14 +109,35 @@
     extraGroups = ["networkmanager" "wheel" "docker"];
   };
 
-  # automatic login
-  services.xserver.displayManager.autoLogin.enable = true;
-  services.xserver.displayManager.autoLogin.user = "race";
+  # fonts
+  fonts.packages = with pkgs; [
+    fira-code
+    hack-font
+    jetbrains-mono
+    iosevka
+  ];
+
+  services.mullvad-vpn = {
+    enable = true;
+  };
 
   environment.systemPackages = with pkgs; [
     git
     wget
+
+    swww
+    rofi-wayland
   ];
+
+  hardware = {
+    opengl.enable = true;
+    nvidia = {
+      modesetting.enable = true;
+      nvidiaSettings = true;
+      open = false;
+      package = config.boot.kernelPackages.nvidiaPackages.stable;
+    };
+  };
 
   # Some programs need SUID wrappers, can be configured further or are
   # started in user sessions.
