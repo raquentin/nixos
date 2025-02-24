@@ -7,7 +7,7 @@
       theme = "grayscale";
       font-family = "JetBrains Mono";
       font-size = 20;
-      cursor-style = "block";
+      shell-integration-features = "no-cursor";
       cursor-style-blink = false;
       window-padding-x = 6;
       window-padding-y = 6;

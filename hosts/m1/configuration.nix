@@ -87,7 +87,7 @@
   services.displayManager.sddm.enable = true;
   services.desktopManager.plasma6.enable = true;
 
-  progrmas.hyprland.enable = true;
+  programs.hyprland.enable = true;
 
   # Configure keymap in X11
   # services.xserver.xkb.layout = "us";
@@ -114,12 +114,23 @@
     extraGroups = ["networkmanager" "wheel" "docker"];
   };
 
-  services.xserver.displayManager.autoLogin.enable = true;
-  services.xserver.displayManager.autoLogin.user = "race";
+  fonts.packages = with pkgs; [
+    fira-code
+    hack-font
+    jetbrains-mono
+    iosevka
+  ];
+
+  services.mullvad-vpn = {
+    enable = true;
+  };
 
   environment.systemPackages = with pkgs; [
     wget
     git
+
+    swww
+    rofi-wayland
   ];
 
   # Some programs need SUID wrappers, can be configured further or are
