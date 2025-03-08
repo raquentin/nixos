@@ -39,13 +39,17 @@
     ripgrep
     jq
     eza
-    zoxide
     fzf
 
     # pl
     python312
     typst
   ];
+
+  programs.zoxide = {
+    enable = true;
+    enableZshIntegration = true;
+  };
 
   programs.git = {
     enable = true;

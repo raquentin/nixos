@@ -25,7 +25,7 @@ vim.opt.showmode = false
 
 -- clipboard
 vim.schedule(function()
-	vim.opt.clipboard = "unnamedplus"
+	vim.opt.clipboard = "unnamed,unnamedplus"
 end)
 
 -- undo

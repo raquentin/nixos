@@ -67,12 +67,15 @@
     LC_TIME = "en_US.UTF-8";
   };
 
-  services.xserver.enable = true; # x11
-  services.displayManager.sddm.enable = true; # kde plasma
-  services.desktopManager.plasma6.enable = true; # kde plasma
-  services.xserver.videoDrivers = ["nvidia"];
+  services.xserver.enable = true;
+  services.displayManager.sddm.enable = true;
 
-  programs.hyprland.enable = true;
+  programs.hyprland = {
+    enable = true;
+    xwayland.enable = true;
+  };
+
+  services.displayManager.sessionPackages = [pkgs.hyprland];
 
   # x11 keymap
   services.xserver.xkb = {
@@ -99,8 +102,9 @@
 
   # shell must be at system level
   programs.zsh.enable = true;
-  programs.zsh.shellInit = "eval \"$(zoxide init zsh)\"
-  [ -z \"$TMUX\"  ] && { tmux attach || exec tmux new-session && exit;}";
+  programs.zsh.shellInit = "
+    [ -z \"$TMUX\"  ] && { tmux attach || exec tmux new-session && exit;}
+  ";
 
   users.users.race = {
     isNormalUser = true;
@@ -127,16 +131,42 @@
 
     swww
     rofi-wayland
+    hyprpicker
+    polkit_gnome
+    hyprland
+    grim
+    slurp
+    wl-clipboard
   ];
+
+  systemd.user.services.polkit-gnome-authentication-agent-1 = {
+    description = "polkit-gnome-authentication-agent-1";
+    wantedBy = ["graphical-session.target"];
+    wants = ["graphical-session.target"];
+    after = ["graphical-session.target"];
+    serviceConfig = {
+      Type = "simple";
+      ExecStart = "${pkgs.polkit_gnome}/libexec/polkit-gnome-authentication-agent-1";
+      Restart = "on-failure";
+      RestartSec = 1;
+      TimeoutStopSec = 10;
+    };
+  };
+
+  services.dbus.enable = true;
+
+  services.udev.extraRules = ''
+    # Allow access to video devices
+    SUBSYSTEM=="drm", KERNEL=="card*", TAG+="seat", TAG+="master-of-seat"
+  '';
 
   hardware = {
     opengl.enable = true;
-    nvidia = {
-      modesetting.enable = true;
-      nvidiaSettings = true;
-      open = false;
-      package = config.boot.kernelPackages.nvidiaPackages.stable;
-    };
+  };
+
+  xdg.portal = {
+    enable = true;
+    extraPortals = [pkgs.xdg-desktop-portal-hyprland];
   };
 
   # Some programs need SUID wrappers, can be configured further or are

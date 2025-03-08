@@ -20,7 +20,7 @@
         cursor-color = "#b1b1b1";
         foreground = "#ffffff";
         palette = [
-          "0=#101010"
+          "0=#000000"
           "1=#ffffff"
           "2=#ffffff"
           "3=#e6e6e6"

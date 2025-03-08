@@ -22,6 +22,7 @@
       llvmPackages_19.libcxxClang # goto def cpp
       jdt-language-server # java
       tinymist # typst
+      verible # systemverilog, verilog
 
       # fmt
       alejandra # nix
@@ -29,10 +30,6 @@
       rustfmt # rust
       stylua # lua
       cmake-format #cmake
-
-      # clipboard
-      xclip
-      wl-clipboard
 
       # c compiler
       zig

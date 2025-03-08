@@ -6,6 +6,7 @@ lspconfig.gleam.setup({})
 lspconfig.ocamllsp.setup({})
 lspconfig.lua_ls.setup({})
 lspconfig.nil_ls.setup({})
+lspconfig.verible.setup({})
 lspconfig.clangd.setup({
 	init_options = {
 		fallbackFlags = { "--std=c++23" },
