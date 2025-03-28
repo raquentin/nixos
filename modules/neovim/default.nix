@@ -23,6 +23,7 @@
       jdt-language-server # java
       tinymist # typst
       verible # systemverilog, verilog
+      zls # zig
 
       # fmt
       alejandra # nix
@@ -65,7 +66,7 @@
       # navigation
       neo-tree-nvim
       nvim-web-devicons
-      harpoon
+      harpoon2
 
       # misc
       typst-preview-nvim

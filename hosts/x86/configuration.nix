@@ -67,21 +67,23 @@
     LC_TIME = "en_US.UTF-8";
   };
 
-  services.xserver.enable = true;
-  services.displayManager.sddm.enable = true;
+  services.xserver = {
+    enable = true;
+    videoDrivers = ["amdgpu"];
+  };
 
   programs.hyprland = {
     enable = true;
     xwayland.enable = true;
   };
 
-  services.displayManager.sessionPackages = [pkgs.hyprland];
-
   # x11 keymap
   services.xserver.xkb = {
     layout = "us";
     variant = "";
   };
+
+  services.desktopManager.plasma6.enable = true;
 
   services.printing.enable = true; # CUPS to print documents
 
@@ -102,9 +104,7 @@
 
   # shell must be at system level
   programs.zsh.enable = true;
-  programs.zsh.shellInit = "
-    [ -z \"$TMUX\"  ] && { tmux attach || exec tmux new-session && exit;}
-  ";
+  programs.zsh.shellInit = "";
 
   users.users.race = {
     isNormalUser = true;
@@ -129,7 +129,7 @@
     git
     wget
 
-    swww
+    hyprpaper
     rofi-wayland
     hyprpicker
     polkit_gnome
@@ -138,6 +138,10 @@
     slurp
     wl-clipboard
   ];
+
+  programs.steam = {
+    enable = true;
+  };
 
   systemd.user.services.polkit-gnome-authentication-agent-1 = {
     description = "polkit-gnome-authentication-agent-1";
@@ -155,18 +159,8 @@
 
   services.dbus.enable = true;
 
-  services.udev.extraRules = ''
-    # Allow access to video devices
-    SUBSYSTEM=="drm", KERNEL=="card*", TAG+="seat", TAG+="master-of-seat"
-  '';
-
   hardware = {
     opengl.enable = true;
-  };
-
-  xdg.portal = {
-    enable = true;
-    extraPortals = [pkgs.xdg-desktop-portal-hyprland];
   };
 
   # Some programs need SUID wrappers, can be configured further or are

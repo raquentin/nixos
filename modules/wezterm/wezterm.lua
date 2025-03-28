@@ -7,7 +7,7 @@ end
 
 config.color_scheme = "Grayscale (dark) (terminal.sexy)"
 
-config.font_size = 21
+config.font_size = 19
 config.font = wezterm.font("JetBrains Mono")
 config.window_close_confirmation = "NeverPrompt"
 config.use_fancy_tab_bar = false

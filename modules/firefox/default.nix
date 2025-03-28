@@ -80,6 +80,23 @@
                 }
               ];
             }
+            {
+              name = "mail";
+              bookmarks = [
+                {
+                  name = "tuta";
+                  url = "https://app.tuta.com";
+                }
+                {
+                  name = "purely";
+                  url = "https://inbox.purelymail.com";
+                }
+                {
+                  name = "gt";
+                  url = "https://mail.gatech.edu";
+                }
+              ];
+            }
           ];
         }
       ];
@@ -92,7 +109,59 @@
       };
 
       userChrome = ''
-        /* some css */
+        @-moz-document url(chrome://browser/content/browser.xhtml){
+
+          :root:not([inFullscreen]){
+            --uc-bottom-toolbar-height: calc(39px + var(--toolbarbutton-outer-padding) )
+          }
+
+          :root[uidensity="compact"]:not([inFullscreen]){
+            --uc-bottom-toolbar-height: calc(32px + var(--toolbarbutton-outer-padding) )
+          }
+
+          #browser,
+          #customization-container{ margin-bottom: var(--uc-bottom-toolbar-height,0px) }
+
+          #nav-bar{
+            position: fixed !important;
+            bottom: 0px;
+            /* For some reason -webkit-box behaves internally like -moz-box, but can be used with fixed position. display: flex would work too but it breaks extension menus. */
+            display: -webkit-box;
+            width: 100%;
+            z-index: 1;
+          }
+          #nav-bar-customization-target{ -webkit-box-flex: 1; }
+
+          :root[lwtheme] #nav-bar{
+            background-image: linear-gradient(var(--toolbar-bgcolor),var(--toolbar-bgcolor)), var(--lwt-additional-images,var(--toolbar-bgimage)) !important;
+            background-position: top,var(--lwt-background-alignment);
+            background-repeat: repeat,var(--lwt-background-tiling);
+          }
+          :root[lwtheme-image] #nav-bar{
+            background-image: linear-gradient(var(--toolbar-bgcolor),var(--toolbar-bgcolor)),var(--lwt-header-image), var(--lwt-additional-images,var(--toolbar-bgimage)) !important;
+          }
+
+          /* Fix panels sizing */
+          .panel-viewstack{ max-height: unset !important; }
+
+          #urlbar[breakout][breakout-extend]{
+            display: flex !important;
+            flex-direction: column-reverse;
+            bottom: 0px !important; /* Change to 3-5 px if using compact_urlbar_megabar.css depending on toolbar density */
+            top: auto !important;
+          }
+
+          .urlbarView-body-inner{ border-top-style: none !important; }
+
+          @media (-moz-platform: linux){
+            #notification-popup[side="top"]{
+              margin-top: calc(-2 * var(--panel-padding-block) - 40px - 32px - 8.5em) !important;
+            }
+            #permission-popup[side="top"]{
+              margin-top: calc(-2 * var(--panel-padding-block) - 2.5em);
+            }
+          }
+        }
       '';
 
       extensions = with inputs.firefox-addons.packages.${pkgs.system}; [

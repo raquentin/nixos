@@ -11,6 +11,7 @@
     ../modules/firefox
     ../modules/neovim
     ../modules/ghostty
+    ../modules/wezterm
     ../modules/kitty
     ../modules/tmux
     ../modules/zsh
