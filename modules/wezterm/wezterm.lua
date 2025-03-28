@@ -15,7 +15,7 @@ config.tab_bar_at_bottom = true
 config.tab_max_width = 4
 config.enable_wayland = false
 config.warn_about_missing_glyphs = false
-config.audible_bell = false
+config.audible_bell = "Disabled"
 
 config.keys = {
 	{
